@@ -104,6 +104,42 @@ footer{background:var(--panel);border-top:1px solid var(--border);padding:4rem 7
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+/* ===== MOBILE RESPONSIVE ===== */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:1100;flex-shrink:0;}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:transform .3s,opacity .3s;border-radius:1px;}
+.nav-hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hamburger.is-open span:nth-child(2){opacity:0;}
+.nav-hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:768px){
+.nav-hamburger{display:flex;}
+.nav-links{display:flex!important;position:fixed;inset:0;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:1050;opacity:0;pointer-events:none;transition:opacity .3s;list-style:none;}
+.nav-links.is-open{opacity:1;pointer-events:all;}
+.nav-links a{font-size:22px;letter-spacing:5px;}
+#hero{padding-top:80px;}
+.hero-content{max-width:100%;}
+.hero-cta{flex-direction:column;align-items:center;gap:.75rem;}
+.hero-cta .btn-primary,.hero-cta .btn-outline{width:100%;max-width:260px;text-align:center;display:flex!important;align-items:center;justify-content:center;}
+.scroll-hint{display:none;}
+.footer-top{flex-direction:column;align-items:center;text-align:center;}
+.footer-top>*{text-align:center;}
+.footer-links{justify-content:center;}
+.why-img-stack{height:320px;}
+.sec{padding:clamp(50px,8vh,90px) 5vw;}
+.booking-aside{position:static!important;}
+}
+@media(max-width:480px){
+nav{padding:.9rem 5vw;}
+.nav-brand{font-size:22px;}
+.hero-title{font-size:clamp(30px,10vw,52px)!important;}
+.hero-sub{max-width:100%;}
+.hero-content{padding:2rem 1.25rem;}
+.form-grid{grid-template-columns:1fr!important;}
+.footer-top{gap:1.5rem;}
+footer{padding:2.5rem 5vw 2rem;}
+.why-img-stack{height:240px;}
+.btn-primary,.btn-outline{min-height:48px;}
+.map-wrap{height:280px;}
+}
 </style>
 </head>
 <body>
@@ -114,7 +150,7 @@ footer{background:var(--panel);border-top:1px solid var(--border);padding:4rem 7
     <li><a href="#before-after">Our Work</a></li>
     <li><a href="#booking">Book Now</a></li>
   </ul>
-</nav>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button></nav>
 
 <section id="hero">
   <div class="hero-img"></div>
@@ -307,5 +343,5 @@ baSliders.forEach(s=>{
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
-</body>
+<script>(function(){var t=document.getElementById("nav-toggle"),n=document.querySelector(".nav-links");if(!t||!n)return;t.addEventListener("click",function(){t.classList.toggle("is-open");n.classList.toggle("is-open");document.body.style.overflow=n.classList.contains("is-open")?"hidden":"";});n.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){t.classList.remove("is-open");n.classList.remove("is-open");document.body.style.overflow="";});});})();</script></body>
 </html>
